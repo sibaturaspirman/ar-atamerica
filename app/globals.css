@@ -185,6 +185,11 @@ body {
 }
 
 /* ANIMATIONS */
+@keyframes upDown {
+  0% { transform: translateY(-5%) };
+  100% { transform: translateY(5%) };
+}
+
 @keyframes scanning {
   0% {
     transform: translateY(100%);
@@ -218,6 +223,14 @@ body {
   }
 }
 
+
+.animate-upDown {
+  animation: upDown 900ms ease infinite alternate;
+}
+.animate-upDownCepet {
+  animation: upDown 400ms ease infinite alternate;
+}
+
 .animate-scanning {
   animation: scanning 1000ms ease infinite alternate;
 }
@@ -225,3 +238,16 @@ body {
 .animate-countdown {
   animation: countdown 3500ms ease 1 alternate;
 }
+
+.custom-pagination{
+  position: relative;
+}
+  .custom-pagination .swiper-pagination-bullet{
+    width: 16px;
+    height: 8px;
+    border-radius: 5px !important;
+    background-color: #0860B7;
+  }
+  .custom-pagination .swiper-pagination-bullet-active{
+    background-color: #151515;
+  }

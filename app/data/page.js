@@ -39,7 +39,7 @@ export default function ARData() {
 }
 
   return (
-    <div className="flex fixed h-full w-full overflow-auto flex-col items-center justify-centerx py-5 pt-14 pb-10 px-5">
+    <div className="flex fixed h-full w-full overflow-auto flex-col items-center justify-centerx py-5 pt-18 pb-10 px-5">
       <div className="relative w-full flex justify-center items-center flex-col">
         <div className='relative w-[85%] mx-auto flex justify-center items-center'>
           <Image src='/frame.png' width={311} height={454} alt='Zirolu' className='w-full' priority />
@@ -130,7 +130,7 @@ export default function ARData() {
             </div>
 
 
-            <button className={`relative w-[90%] mx-auto flex justify-center items-center ${isValid() ? '' : 'opacity-50'}`} onClick={handleSubmit}>
+            <button className={`relative w-[90%] mx-auto flex justify-center items-center ${isValid() ? '' : 'pointer-events-none opacity-50'}`} onClick={handleSubmit}>
                 <Image src='/btn-continue.png' width={303} height={48} alt='Zirolu' className='w-full' priority />
             </button>
 

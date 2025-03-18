@@ -5,6 +5,8 @@ import { setCookie } from 'cookies-next';
 import Link from 'next/link';
 import React,{ useEffect, useState, useRef } from 'react';
 import FrameBottom from "./../components/FrameBottom";
+import SwiperComponent from "./../components/SwiperComponent";
+
 import { useRouter } from 'next/navigation';
 
 export default function ARData() {
@@ -24,9 +26,9 @@ export default function ARData() {
 }, [imageResultAI, nameFix])
 
   return (
-    <div className="flex fixed h-full w-full overflow-auto flex-col items-center justify-centerx py-5 pt-14 pb-10 px-5">
+    <div className="flex fixed h-full w-full overflow-auto flex-col items-center justify-centerx py-5 pt-18 pb-10 px-5">
       <div className="relative w-full flex justify-center items-center flex-col">
-        <div className='relative w-[100%] mx-auto flex justify-center items-center'>
+        <div className='relative w-full mx-auto flex justify-center items-center'>
           <Image src='/frame-objective.png' width={335} height={200} alt='Zirolu' className='w-full' priority />
 
           <div className="absolute top-0 left-0 w-full p-5 py-8 pt-6">
@@ -61,6 +63,48 @@ export default function ARData() {
             <button className={`relative w-full mx-auto flex justify-center items-center mt-2`}>
               <Image src='/btn-missioncard.png' width={303} height={48} alt='Zirolu' className='w-full' priority />
             </button> */}
+          </div>
+        </div>
+
+        <div className='relative w-full mx-auto flex justify-center items-center mt-3'>
+          <Image src='/frame-mission.png' width={335} height={364} alt='Zirolu' className='w-full' priority />
+
+          <div className="absolute top-0 left-0 w-full p-5 py-8 pt-8">
+            <div className='relative w-full mx-auto flex justify-center items-center'>
+              <Image src='/mission-title-space.png' width={298} height={44} alt='Zirolu' className='w-full' priority />
+            </div>
+            <div className='relative w-full mx-auto flex justify-center items-center mt-2'>
+              <button className={`relative w-full mx-auto flex justify-center items-center mr-1`}>
+                <Image src='/mission-1.png' width={145} height={250} alt='Zirolu' className='w-full' priority />
+              </button>
+              <button className={`relative w-full mx-auto flex justify-center items-center ml-1`}>
+                <Image src='/mission-2.png' width={145} height={250} alt='Zirolu' className='w-full' priority />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className='relative w-full mx-auto flex justify-center items-center mt-3'>
+          <Image src='/frame-mission.png' width={335} height={364} alt='Zirolu' className='w-full' priority />
+
+          <div className="absolute top-0 left-0 w-full p-5 py-8 pt-8">
+            <div className='relative w-full mx-auto flex justify-center items-center'>
+              <Image src='/mission-title-moon.png' width={298} height={44} alt='Zirolu' className='w-full' priority />
+            </div>
+            <div className='relative w-full mx-auto flex justify-center mt-2 overflow-x-auto'>
+              <SwiperComponent />
+              {/* <div className='relative w-[1024px] mx-auto flex'>
+                <button className={`relative w-full mx-auto flex justify-center items-center mr-1`}>
+                  <Image src='/mission-3.png' width={145} height={250} alt='Zirolu' className='w-full' priority />
+                </button>
+                <button className={`relative w-full mx-auto flex justify-center items-center mr-1 ml-1`}>
+                  <Image src='/mission-4.png' width={145} height={250} alt='Zirolu' className='w-full' priority />
+                </button>
+                <button className={`relative w-full mx-auto flex justify-center items-center ml-1`}>
+                  <Image src='/mission-5.png' width={145} height={250} alt='Zirolu' className='w-full' priority />
+                </button>
+              </div> */}
+            </div>
           </div>
         </div>
       </div>
