@@ -58,7 +58,7 @@ export default function ARData() {
                         value={payload.name}
                         id='name'
                         name='name'
-                        className={`w-full text-base outline-none py-4 px-3 border-2 border-[#CFCFCF] bg-white rounded-md text-[#014283]`}
+                        className={`w-full text-base outline-none py-3 px-3 border-2 border-[#CFCFCF] bg-white rounded-md text-[#014283]`}
                         placeholder='Input your name'
                         onChange={handleChange}
                     />

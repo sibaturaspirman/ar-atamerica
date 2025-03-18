@@ -8,11 +8,11 @@ import { useRouter } from 'next/navigation';
 
 // @snippet:start(client.config)
 fal.config({
-    // credentials: 'FAL_KEY_ID:FAL_KEY_SECRET',
-    requestMiddleware: fal.withProxy({
-      targetUrl: '/api/fal/proxy', // the built-int nextjs proxy
-      // targetUrl: 'http://localhost:3333/api/fal/proxy', // or your own external proxy
-    }),
+    credentials: '26eb7078-7780-4257-99c9-907b12153ed6:cb5ce36d66049ed8882f989fc75ad54e',
+    // requestMiddleware: fal.withProxy({
+    //   targetUrl: '/api/fal/proxy', // the built-int nextjs proxy
+    //   // targetUrl: 'http://localhost:3333/api/fal/proxy', // or your own external proxy
+    // }),
 });
 let URL_RESULT = '', FACE_URL_RESULT = ''
 let FIXSEEDPILIH = 0, PROMPTFIX = '';
@@ -36,6 +36,7 @@ export default function Cam() {
     const router = useRouter();
     const [enabled, setEnabled] = useState(false);
     const [captured, setCaptured] = useState(false);
+    const [countdown, setCountdown] = useState(null);
     const videoRef = useRef(null);
     const previewRef = useRef(null);
 
@@ -43,57 +44,71 @@ export default function Cam() {
 
     const captureVideo = ({ width = 512, height = 512 }) => {
         setCaptured(true);
-        setTimeout(() => {
-            setEnabled(true);
-            setCaptured(null);
-            
-            const canvas = previewRef.current;
-            const video = videoRef.current;
-            
-            if (!canvas || !video) return;
-            
-            // Resize canvas
-            canvas.width = width;
-            canvas.height = height;
-            
-            const context = canvas.getContext("2d");
-            if (!context) return;
-            
-            // Hitung aspect ratio untuk crop
-            const aspectRatio = video.videoWidth / video.videoHeight;
-            let sourceX, sourceY, sourceWidth, sourceHeight;
-
-            if (aspectRatio > 1) {
+        setCountdown(3);
+    
+        // Mulai countdown
+        let counter = 3;
+        const interval = setInterval(() => {
+          counter--;
+          setCountdown(counter);
+    
+          if (counter === 0) {
+            clearInterval(interval);
+            setCountdown(null);
+    
+            setTimeout(() => {
+              setEnabled(true);
+              setCaptured(null);
+    
+              const canvas = previewRef.current;
+              const video = videoRef.current;
+    
+              if (!canvas || !video) return;
+    
+              // Resize canvas
+              canvas.width = width;
+              canvas.height = height;
+    
+              const context = canvas.getContext("2d");
+              if (!context) return;
+    
+              // Hitung aspect ratio untuk crop
+              const aspectRatio = video.videoWidth / video.videoHeight;
+              let sourceX, sourceY, sourceWidth, sourceHeight;
+    
+              if (aspectRatio > 1) {
                 sourceWidth = video.videoHeight;
                 sourceHeight = video.videoHeight;
                 sourceX = (video.videoWidth - video.videoHeight) / 2;
                 sourceY = 0;
-            } else {
+              } else {
                 sourceWidth = video.videoWidth;
                 sourceHeight = video.videoWidth;
                 sourceX = 0;
                 sourceY = (video.videoHeight - video.videoWidth) / 2;
-            }
-
-            // Gambar video ke canvas
-            context.drawImage(
+              }
+    
+              // Gambar video ke canvas
+              context.drawImage(
                 video,
                 sourceX, sourceY, sourceWidth, sourceHeight,
                 0, 0, width, height
-            );
-
-            // Simpan hasil capture ke localStorage
-            let faceImage = canvas.toDataURL();
-            setImageFile(faceImage)
-            localStorage.setItem("faceImage", faceImage);
-
-            // Stop video setelah menangkap gambar
-            video.pause();
-            if (video.srcObject) {
+              );
+    
+              // Simpan hasil capture ke localStorage
+              let faceImage = canvas.toDataURL();
+              setImageFile(faceImage);
+              localStorage.setItem("faceImage", faceImage);
+    
+              // Stop video setelah menangkap gambar
+              video.pause();
+              if (video.srcObject) {
                 video.srcObject.getTracks().forEach(track => track.stop());
                 video.srcObject = null;
-            }
-        }, 3000);
+              }
+            }, 500); // Delay kecil untuk capture setelah countdown selesai
+          }
+        }, 1000);
     };
 
     const retake = () => {
@@ -120,11 +135,6 @@ export default function Cam() {
     const [numSteps, setNumSteps] = useState(4);
 
     const [imageFile, setImageFile] = useState(null);
-    const [imageFile2, setImageFile2] = useState(null);
-    const [imageFile3, setImageFile3] = useState(null);
-    const [styleFix, setStyleFix] = useState(null);
-    const [styleFix2, setStyleFix2] = useState(null);
-    const [masalah, setMasalah] = useState(null);
     const [genderFix, setGenderFix] = useState(null);
     const [numProses, setNumProses] = useState(0);
     const [numProses1, setNumProses1] = useState(null);
@@ -132,8 +142,6 @@ export default function Cam() {
     const [error, setError] = useState(true);
     const [result, setResult] = useState(null);
     const [resultFaceSwap, setResultFaceSwap] = useState(null);
-    const [resultFaceSwap2, setResultFaceSwap2] = useState(null);
-    const [resultFaceSwap3, setResultFaceSwap3] = useState(null);
     const [logs, setLogs] = useState([]);
     const [elapsedTime, setElapsedTime] = useState(0);
     // @snippet:end
@@ -328,10 +336,11 @@ export default function Cam() {
                     <div className="relative w-full flex flex-col justify-center items-center mt-4">
                         <div className='relative w-[77%] mb-8'>
                             {captured && 
-                            <div className='absolute top-0 left-0 right-0 bottom-0 w-[100px] h-[100px] lg:w-[174px] lg:h-[174px] overflow-hidden m-auto flex justify-center items-center pointer-events-none z-10'>
-                                <div className='w-full animate-countdown translate-y-[35%]'>
+                            <div className='absolute top-0 left-0 right-0 bottom-0 w-[100px] h-[100px] lg:w-[174px] lg:h-[174px] overflow-hidden m-auto flex justify-center items-center pointer-events-none z-10 text-5xl font-bold text-white'>
+                                {/* <div className='w-full animate-countdown translate-y-[35%]'>
                                     <Image src='/countdown.png' width={174} height={522} alt='Zirolu' className='w-full' priority />
-                                </div>
+                                </div> */}
+                                {countdown}
                             </div>
                             }
                             <div className='absolute top-0 left-0 w-full mx-auto flex justify-center items-center z-10 scale-[1.1]'>

@@ -29,7 +29,7 @@ export default function ARData() {
         <div className='relative w-[100%] mx-auto flex justify-center items-center'>
           <Image src='/frame-objective.png' width={335} height={200} alt='Zirolu' className='w-full' priority />
 
-          <div className="absolute top-0 left-0 w-full p-5 py-8">
+          <div className="absolute top-0 left-0 w-full p-5 py-8 pt-6">
             <div className='relative w-full flex justify-centerx items-center'>
               {/* <div className="relative overflow-hidden rounded-xl border-4 border-[#014283] w-[50px] mr-2"> */}
               <div className="relative overflow-hidden rounded-xl border-4 border-[#014283] w-[70px] mr-2">
@@ -44,7 +44,7 @@ export default function ARData() {
             </div>
 
             {/* MISSION ON PROGRESS */}
-            <div className='relative w-full mx-auto flex justify-center items-center mt-3'>
+            <div className='relative w-full mx-auto flex justify-center items-center mt-2'>
               <Image src='/mission-info.png' width={303} height={56} alt='Zirolu' className='w-full' priority />
             </div>
             <div className='relative w-full mx-auto flex justify-center items-center mt-2'>
