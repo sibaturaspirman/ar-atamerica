@@ -17,13 +17,18 @@ export default function ARData() {
 
   useEffect(() => {
     // Perform localStorage action
-    if (typeof localStorage !== 'undefined') {
         const item = localStorage.getItem('resulAIBase64')
         const item2 = localStorage.getItem('nameFix')
         setImageResultAI(item)
         setNameFix(item2)
-    }
-}, [imageResultAI, nameFix])
+  }, [imageResultAI, nameFix])
+
+  const openMission = (missionId) => {
+    console.log(missionId)
+    router.push(`/mission/mission${missionId}`);
+  }
+
+
 
   return (
     <div className="flex fixed h-full w-full overflow-auto flex-col items-center justify-centerx py-5 pt-18 pb-10 px-5">
@@ -77,7 +82,7 @@ export default function ARData() {
               <button className={`relative w-full mx-auto flex justify-center items-center mr-1`}>
                 <Image src='/mission-1.png' width={145} height={250} alt='Zirolu' className='w-full' priority />
               </button>
-              <button className={`relative w-full mx-auto flex justify-center items-center ml-1`}>
+              <button className={`relative w-full mx-auto flex justify-center items-center ml-1`} onClick={() => openMission(2)}>
                 <Image src='/mission-2.png' width={145} height={250} alt='Zirolu' className='w-full' priority />
               </button>
             </div>

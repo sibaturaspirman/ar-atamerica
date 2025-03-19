@@ -271,6 +271,8 @@ export default function Cam() {
 
 
     const generateImageSwap = async () => {
+        // window.open('/mission', '_blank').focus();
+
         setNumProses(2)
         reset2();
         // @snippet:start("client.queue.subscribe")

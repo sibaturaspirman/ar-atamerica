@@ -20,9 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`bg-fe ${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`bg-fe ${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="fixed top-0 w-full pointer-events-none z-50">
           <Image src='/frame-top.png' width={750} height={88} alt='Zirolu' className='w-full' priority />
         </div>

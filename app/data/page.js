@@ -29,7 +29,7 @@ export default function ARData() {
 
 
   const handleSubmit = () => {
-    localStorage.setItem('nameFix', payload.name)
+    localStorage.setItem('nameFix', payload.name.toUpperCase())
     localStorage.setItem('genderFix', payload.gender)
     setCookie('ARATMRC_name', payload.name);
     setCookie('ARATMRC_gender', payload.gender);
