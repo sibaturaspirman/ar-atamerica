@@ -111,7 +111,7 @@ export default function ARData() {
             </div>
 
             {/* MISSION ON PROGRESS */}
-            {!statusMisi1 && !statusMisi2 && !statusMisi3 && !statusMisi4 && !statusMisi5 &&
+            {!statusMisi5 &&
             <div className="relative w-full">
               <div className='relative w-full mx-auto flex justify-center items-center mt-2'>
                 <Image src='/mission-info.png' width={303} height={56} alt='Zirolu' className='w-full' priority />
