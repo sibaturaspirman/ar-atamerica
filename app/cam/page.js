@@ -366,7 +366,7 @@ export default function Cam() {
                     
                         {numProses1 && 
                         <div className={`relative w-[90%]`}>
-                            <div className='animate-upDownCepet relative flex justify-center items-center flex-col py-2 lg:py-6 px-2 mt-2 text-xs border-2 text-left bg-[#EF000F] rounded-xl text-[#fff] font-bold bg-black/80 p-7 rounded-sm'>
+                            <div className='animate-upDownCepet relative flex justify-center items-center flex-col py-2 lg:py-6 px-2 mt-2 text-xs border-2 text-left bg-[#014283] rounded-xl text-[#fff] font-bold bg-black/80 p-7 rounded-sm'>
                                 <div className='flex justify-center items-center w-full'>
                                     <Image src='/icon-info.png' width={40} height={40} alt='Zirolu' className='w-[20px] mr-2' priority />
                                     <p>{`Your mission and spaceship are being prepared. GET READY TO LAUNCH!`}</p>
