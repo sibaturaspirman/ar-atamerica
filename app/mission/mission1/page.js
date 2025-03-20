@@ -34,7 +34,7 @@ export default function ARGame() {
         console.log('Pesan diterima dari iframe:', decodedMessage);
         
         if(decodedMessage.action == 'misiDone'){
-          localStorage.setItem('mission2', decodedMessage.data)
+          localStorage.setItem('mission1', decodedMessage.data)
           // alert(decodedMessage.data)
           setTimeout(() => {
             router.push('/mission');
@@ -58,7 +58,7 @@ export default function ARGame() {
                 }} />
         <iframe   
           id="my-iframe"
-          src="https://g.minigim.fun/ar-atamerica-mission-2/dist/index.html" 
+          src="https://g.minigim.fun/ar-atamerica-mission-1/dist/index.html" 
           allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;microphone;"
           className="w-full h-full border-none"
         ></iframe>
