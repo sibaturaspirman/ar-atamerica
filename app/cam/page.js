@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, useMemo } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import PadmaAIClient from "padmaai-client";
 
 // @snippet:start(client.config)
 fal.config({
@@ -126,6 +127,11 @@ export default function Cam() {
 
 
     // AI
+    const [padmaAI, setPadmaAI] = useState(null);
+    const [progressText, setProgressText] = useState('Set Queue');
+    const [progressPersen, setProgressPersen] = useState('0%');
+    const [progressPersen2, setProgressPersen2] = useState(0);
+
     const [prompt1, setPrompt1] = useState();
     const [prompt, setPrompt] = useState(null);
     const [promptNegative, setPromptNegative] = useState('bikini, sexy, boobs, flaws in the eyes, flaws in the face, flaws, lowres, non-HDRi, low quality, worst quality,artifacts noise, text, watermark, glitch, deformed, mutated, ugly, disfigured, hands, low resolution, partially rendered objects,  deformed or partially rendered eyes, deformed, deformed eyeballs, cross-eyed,blurry');
@@ -151,6 +157,9 @@ export default function Cam() {
             const item1 = localStorage.getItem('genderFix')
             setGenderFix(item1)
         }
+
+        const aiInstance = new PadmaAIClient("https://padmaai.zirolu.id", "app_tXxTmRGXzUwliMw1sMgdFUlDFF2S2IO6", "733e5a41-1540-46ee-a1f2-6565d128ba61");
+        setPadmaAI(aiInstance);
     }, [genderFix])
 
 
@@ -169,9 +178,54 @@ export default function Cam() {
             FIXSEEDPILIH = '196402'
         }
 
-        setTimeout(() => {
-            generateImage()
-        }, 500);
+        // setTimeout(() => {
+        //     generateImage()
+        // }, 500);
+
+        generateImageSwapBaru()
+    }
+
+    const generateImageSwapBaru = async () => {
+        padmaAI.onProgress((progress) => {
+            // setProgress(progress.type); // Update the progress state
+            // console.log("Progress:", progress); // Optional: log progress for debugging
+            if(progress.type == 'executing'){
+                setProgressText("Executing")
+            }else if(progress.type == 'progress'){
+                setProgressText("Progress : ")
+                setProgressPersen(progress.progress+'%')
+                setProgressPersen2(progress.progress)
+            }else if(progress.type == 'executed'){
+                setProgressText("Done!")
+                // setProgressPersen('Direct...')
+            }
+
+            console.log(progressPersen2)
+
+          });
+          
+          try {
+            // Generate the image
+            const result = await padmaAI.generateImages(imageFile, genderFix, 'DEFAULT');
+            // setImageUrl(result.imgUrl); // Assuming the image URL is returned
+
+            FACE_URL_RESULT= result.imgUrl;
+
+            toDataURL(FACE_URL_RESULT)
+            .then(async dataUrl => {
+                if (typeof localStorage !== 'undefined') {
+                    localStorage.setItem("resulAIBase64", dataUrl)
+                    localStorage.setItem("faceURLResult", FACE_URL_RESULT)
+                }
+                setTimeout(() => {
+                    router.push('/mission');
+                }, 200);
+            })
+            // console.log(FACE_URL_RESULT)
+
+          } catch (error) {
+            console.error("Error generating image:", error);
+          }
     }
 
 
@@ -266,9 +320,6 @@ export default function Cam() {
         reader.onerror = reject
         reader.readAsDataURL(blob)
     }))
-
-
-
 
     const generateImageSwap = async () => {
         // window.open('/mission', '_blank').focus();
@@ -366,10 +417,13 @@ export default function Cam() {
                     
                         {numProses1 && 
                         <div className={`relative w-[90%]`}>
-                            <div className='animate-upDownCepet relative flex justify-center items-center flex-col py-2 lg:py-6 px-2 mt-2 text-xs border-2 text-left bg-[#014283] rounded-xl text-[#fff] font-bold bg-black/80 p-7 rounded-sm'>
-                                <div className='flex justify-center items-center w-full'>
-                                    <Image src='/icon-info.png' width={40} height={40} alt='Zirolu' className='w-[20px] mr-2' priority />
-                                    <p>{`Your mission and spaceship are being prepared. GET READY TO LAUNCH!`}</p>
+                            <div className='animate-upDownCepet relative flex justify-center items-center flex-col py-2 lg:py-6 px-2 -mt-2 text-xs border-2 text-left bg-[#014283] rounded-xl text-[#fff] font-bold p-7 rounded-sm'>
+                                <div className='flex justify-center items-center w-full flex-col'>
+                                    <div className='flex justify-center items-center w-full'>
+                                        <Image src='/icon-info.png' width={40} height={40} alt='Zirolu' className='w-[20px] mr-2' priority />
+                                        <p>{`Your mission and spaceship are being prepared.`} <span className='font-bold text-yellow'>{progressPersen}</span></p>
+                                    </div>
+                                    <p className='w-full ml-[54px] mt-[4px]'>GET READY TO LAUNCH!</p>
                                 </div>
                                     {/* <p className='mt-2'>{`GET READY! : ${(elapsedTime / 1000).toFixed(2)} detik`}</p>
                                 {error} */}

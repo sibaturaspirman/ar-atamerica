@@ -99,7 +99,7 @@ export default function ARData() {
           <div className="absolute top-0 left-0 w-full p-5 py-8 pt-6">
             <div className='relative w-full flex justify-centerx items-center'>
               {/* <div className="relative overflow-hidden rounded-xl border-4 border-[#014283] w-[50px] mr-2"> */}
-              <div className={`relative overflow-hidden rounded-xl border-4 border-[#014283] ${statusMisi1 && statusMisi2 && statusMisi3 && statusMisi4 && statusMisi5 ? 'w-[50px]' : 'w-[70px]'}  mr-2`}>
+              <div className={`relative overflow-hidden rounded-xl border-4 border-[#014283]  flex justify-center items-center ${statusMisi1 && statusMisi2 && statusMisi3 && statusMisi4 && statusMisi5 ? 'w-[50px] h-[50px]' : 'w-[70px] h-[70px]'}  mr-2`}>
                 {imageResultAI && 
                   <Image src={imageResultAI}  width={400} height={400} alt='Zirolu' className='relative block w-full'></Image> 
                 }
