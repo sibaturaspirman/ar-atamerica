@@ -38,7 +38,7 @@ export default function QuizAnswer() {
       <div className="relative w-full flex justify-center items-center flex-col">
         <div className='relative w-full mx-auto flex justify-center items-center'>
           <Image src='/frame-quiz.png' width={343} height={461} alt='Zirolu' className='w-full' priority />
-          <div className="absolute top-0 left-0 w-full p-6 py-8 pt-6">
+          <div className="absolute top-0 left-0 w-full p-6 py-8 pt-3">
             <h2 className="text-base text-center font-semibold mb-2 leading-[1.2]">{question}</h2>
             <ul>
               {shuffledAnswers.map((answer, index) => (
@@ -67,13 +67,13 @@ export default function QuizAnswer() {
             </ul>
             {selectedAnswer && (
               <div className='relative w-full'>
-                <p className={`mt-2 text-base font-semibold ${isCorrect ? 'text-[#158045]' : 'text-[#AA0808]'}`}>
+                <p className={`mt-1 text-base font-semibold ${isCorrect ? 'text-[#158045]' : 'text-[#AA0808]'}`}>
                   {isCorrect ? 'Correct Answer' : 'Incorrect Answer'}
                 </p>
                 <p className="mt-0 text-sm leading-[1.2]">{!isCorrect ? 'The correct answer is ' : ''} {correctAnswerPenjelasan}</p>
               </div>
             )}
-             <button className={`relative w-full mx-auto flex justify-center items-center mt-3 ${selectedAnswer ? '' : 'pointer-events-none opacity-20'}`} onClick={() => scanQR()}>
+             <button className={`relative w-full mx-auto flex justify-center items-center mt-2 ${selectedAnswer ? '' : 'pointer-events-none opacity-20'}`} onClick={() => scanQR()}>
               <Image src='/btn-scan.png' width={303} height={48} alt='Zirolu' className='w-full' priority />
             </button>
           </div>
