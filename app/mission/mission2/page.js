@@ -29,6 +29,8 @@ export default function ARGame() {
   useEffect(() => {
     const handleMessage = (event) => {
       if (event.origin !== 'https://g.minigim.fun') return;
+      // if (event.origin !== 'https://192.168.0.136:8080') return;
+     
       try {
         const decodedMessage = event.data;
         console.log('Pesan diterima dari iframe:', decodedMessage);
@@ -65,10 +67,16 @@ export default function ARGame() {
                 }} />
         <iframe   
           id="my-iframe"
-          src="https://g.minigim.fun/ar-atamerica-mission-2/dist/index.html" 
+          src="https://g.minigim.fun/ar-atamerica-mission-2/dist/cam.html" 
           allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;microphone;"
           className="w-full h-full border-none"
         ></iframe>
+        {/* <iframe   
+          id="my-iframe"
+          src="https://192.168.0.136:8080/cam.html" 
+          allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;microphone;"
+          className="w-full h-full border-none"
+        ></iframe> */}
     </div>
   );
 }

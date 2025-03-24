@@ -59,7 +59,7 @@ export default function ARGame() {
                 }} />
         <iframe   
           id="my-iframe"
-          src="https://g.minigim.fun/ar-atamerica-mission-1/dist/index.html" 
+          src="https://g.minigim.fun/ar-atamerica-mission-1/dist/cam.html" 
           allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;microphone;"
           className="w-full h-full border-none"
         ></iframe>
