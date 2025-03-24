@@ -15,7 +15,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "swiper": "^11.2.5",
-    "padmaai-client": "^0.0.6"
+    "padmaai-client": "^0.0.6",
+    "html2canvas": "^1.4.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -13,6 +13,7 @@ import "swiper/css/pagination";
 export default function SwiperComponent() {
     const router = useRouter();
 
+    const [statusMisi2, setStatusMisi2] = useState(false);
     const [statusMisi3, setStatusMisi3] = useState(false);
     const [statusMisi4, setStatusMisi4] = useState(false);
     const [statusMisi5, setStatusMisi5] = useState(false);
@@ -22,6 +23,11 @@ export default function SwiperComponent() {
 
     useEffect(() => {
       // Perform localStorage action
+        const itemMisi2 = localStorage.getItem('mission2')
+        if(itemMisi2 != null && itemMisi2 == 'misi2'){
+          setStatusMisi2(true)
+        }
+        
           const itemMisi3 = localStorage.getItem('mission3')
           if(itemMisi3 != null && itemMisi3 == 'misi3'){
             setStatusMisi3(true)
@@ -37,15 +43,19 @@ export default function SwiperComponent() {
             setStatusMisi5(true)
           }
   
-    }, [statusMisi3, statusMisi4, statusMisi5])
+    }, [statusMisi2, statusMisi3, statusMisi4, statusMisi5])
 
     const toggleQRView = () => {
         setStatusViewQR((prevStatus) => !prevStatus);
     };
     const openMission = (missionId) => {
       console.log(missionId)
-    //   router.push(`/mission/mission${missionId}`);
-        toggleQRView()
+      if(missionId == '4'){
+        router.push(`/mission/mission${missionId}`);
+      }else{
+        router.push(`/mission/mission${missionId}/quiz`);
+      }
+        // toggleQRView()
     }
 
   return (
@@ -63,8 +73,12 @@ export default function SwiperComponent() {
         className="w-full"
         >
             <SwiperSlide className="flex justify-center items-center !w-[42%]">
-                <button className={`relative w-full mx-auto flex justify-center items-center`} onClick={() => openMission(3)}>
+                <button className={`relative w-full mx-auto flex justify-center items-center ${statusMisi2 ? '' : 'pointer-events-none'}`} onClick={() => openMission(3)}>
                     <Image src='/mission-3.png' width={145} height={250} alt='Zirolu' className='w-full' priority />
+
+                    <div className={`absolute top-0 left-0 w-full mx-auto flex justify-center items-center ${statusMisi2 ? 'opacity-0' : 'opacity-100'}`}>
+                    <Image src='/mission-locked.png' width={145} height={250} alt='Zirolu' className='w-full rounded-[10px]' priority />
+                    </div>
                     
                     <div className={`absolute top-0 left-0 w-[100px] mx-auto flex justify-center items-center ${statusMisi3 ? '' : 'opacity-0'}`}>
                         <Image src='/completed.png' width={175} height={58} alt='Zirolu' className='w-full' priority />
@@ -72,8 +86,12 @@ export default function SwiperComponent() {
                 </button>
             </SwiperSlide>
             <SwiperSlide className="flex justify-center items-center !w-[42%]">
-                <button className={`relative w-full mx-auto flex justify-center items-center`} onClick={() => openMission(4)}>
+                <button className={`relative w-full mx-auto flex justify-center items-center ${statusMisi3 ? '' : 'pointer-events-none'}`} onClick={() => openMission(4)}>
                     <Image src='/mission-4.png' width={145} height={250} alt='Zirolu' className='w-full' priority />
+
+                    <div className={`absolute top-0 left-0 w-full mx-auto flex justify-center items-center ${statusMisi3 ? 'opacity-0' : 'opacity-100'}`}>
+                    <Image src='/mission-locked.png' width={145} height={250} alt='Zirolu' className='w-full rounded-[10px]' priority />
+                    </div>
                     
                     <div className={`absolute top-0 left-0 w-[100px] mx-auto flex justify-center items-center ${statusMisi4 ? '' : 'opacity-0'}`}>
                         <Image src='/completed.png' width={175} height={58} alt='Zirolu' className='w-full' priority />
@@ -81,8 +99,12 @@ export default function SwiperComponent() {
                 </button>
             </SwiperSlide>
             <SwiperSlide className="flex justify-center items-center !w-[42%]">
-                <button className={`relative w-full mx-auto flex justify-center items-center`} onClick={() => openMission(5)}>
+                <button className={`relative w-full mx-auto flex justify-center items-center ${statusMisi4 ? '' : 'pointer-events-none'}`} onClick={() => openMission(5)}>
                     <Image src='/mission-5.png' width={145} height={250} alt='Zirolu' className='w-full' priority />
+
+                    <div className={`absolute top-0 left-0 w-full mx-auto flex justify-center items-center ${statusMisi4 ? 'opacity-0' : 'opacity-100'}`}>
+                    <Image src='/mission-locked.png' width={145} height={250} alt='Zirolu' className='w-full rounded-[10px]' priority />
+                    </div>
                     
                     <div className={`absolute top-0 left-0 w-[100px] mx-auto flex justify-center items-center ${statusMisi5 ? '' : 'opacity-0'}`}>
                         <Image src='/completed.png' width={175} height={58} alt='Zirolu' className='w-full' priority />
