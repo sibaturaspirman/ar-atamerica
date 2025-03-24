@@ -38,12 +38,7 @@ export default function ARGame() {
           // alert(decodedMessage.data)
           setTimeout(() => {
             router.push('/mission');
-          }, 200);
-        }else if(decodedMessage.action == 'misiDoneQuiz'){
-          localStorage.setItem('mission1', decodedMessage.data)
-          // alert(decodedMessage.data)
-          setTimeout(() => {
-            router.push('/mission/mission2/quiz');
+            // router.push('/mission/mission2/quiz');
           }, 200);
         }
 
@@ -68,6 +63,14 @@ export default function ARGame() {
           allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;microphone;"
           className="w-full h-full border-none"
         ></iframe>
+        {/* <iframe   
+          id="my-iframe"
+          src="https://192.168.0.136:8080/cam.html" 
+          allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;microphone;"
+          className="w-full h-full border-none"
+        ></iframe> */}
+
+
     </div>
   );
 }
