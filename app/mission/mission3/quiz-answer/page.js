@@ -91,7 +91,7 @@ export default function QuizAnswer() {
             </ul>
             {selectedAnswer && (
               <div className='relative w-full'>
-                <p className={`mt-2 text-base font-semibold ${isCorrect ? 'text-[#158045]' : 'text-[#AA0808]'}`}>
+                <p className={`mt-1 text-sm font-semibold ${isCorrect ? 'text-[#158045]' : 'text-[#AA0808]'}`}>
                   {isCorrect ? 'Correct Answer' : 'Incorrect Answer'}
                 </p>
                 {isCorrect &&
