@@ -41,10 +41,16 @@ export default function ARData() {
         const item = localStorage.getItem('resulAIBase64')
         const item2 = localStorage.getItem('nameFix')
         const item3 = localStorage.getItem('faceURLResult')
-        const item4 = localStorage.getItem('beginMission')
         setImageResultAI(item)
         setNameFix(item2)
         setImageResultAIURL(item3)
+
+        localStorage.removeItem("beginMission");
+        localStorage.removeItem("mission1");
+        localStorage.removeItem("mission2");
+        localStorage.removeItem("mission3");
+        localStorage.removeItem("mission4");
+        localStorage.removeItem("mission5");
 
   }, [imageResultAI, nameFix, imageResultAIURL])
 
