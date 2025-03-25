@@ -35,19 +35,12 @@ export default function ARGame() {
         const decodedMessage = event.data;
         console.log('Pesan diterima dari iframe:', decodedMessage);
         
-        if(decodedMessage.action == 'misiDone'){
-          localStorage.setItem('mission2', decodedMessage.data)
-          // alert(decodedMessage.data)
-          setTimeout(() => {
-            router.push('/mission');
-            // router.push('/mission/mission3/quiz');
-          }, 200);
-        }else if(decodedMessage.action == 'misiDoneQuiz'){
-          localStorage.setItem('mission2', decodedMessage.data)
-          // alert(decodedMessage.data)
-          setTimeout(() => {
-            router.push('/mission/mission3/quiz');
-          }, 200);
+        if(decodedMessage.action == 'camdone'){
+          // setTimeout(() => {
+          //   // router.push('/mission');
+          //   router.push('/mission/mission1/ar');
+          // }, 200);
+          location.href='/mission/mission2/ar'
         }
 
       } catch (error) {

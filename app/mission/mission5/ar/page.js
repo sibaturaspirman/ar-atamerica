@@ -33,12 +33,19 @@ export default function ARGame() {
         const decodedMessage = event.data;
         console.log('Pesan diterima dari iframe:', decodedMessage);
         
-        if(decodedMessage.action == 'camdone'){
-          // setTimeout(() => {
-          //   // router.push('/mission');
-          //   router.push('/mission/mission1/ar');
-          // }, 200);
-          location.href='/mission/mission3/ar'
+        if(decodedMessage.action == 'misiDone'){
+          localStorage.setItem('mission5', decodedMessage.data)
+          // alert(decodedMessage.data)
+          setTimeout(() => {
+            // router.push('/mission');
+            router.push('/result');
+          }, 200);
+        }else if(decodedMessage.action == 'misiDoneQuiz'){
+          localStorage.setItem('mission5', decodedMessage.data)
+          // alert(decodedMessage.data)
+          setTimeout(() => {
+            router.push('/result');
+          }, 200);
         }
 
       } catch (error) {
@@ -58,7 +65,7 @@ export default function ARGame() {
                 }} />
         <iframe   
           id="my-iframe"
-          src="https://g.minigim.fun/ar-atamerica-mission-3/dist/cam.html" 
+          src="https://g.minigim.fun/ar-atamerica-mission-5/dist/index.html" 
           allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;microphone;"
           className="w-full h-full border-none"
         ></iframe>

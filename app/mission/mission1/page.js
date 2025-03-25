@@ -29,17 +29,17 @@ export default function ARGame() {
   useEffect(() => {
     const handleMessage = (event) => {
       if (event.origin !== 'https://g.minigim.fun') return;
+      // if (event.origin !== 'https://192.168.0.136:8080') return;
       try {
         const decodedMessage = event.data;
         console.log('Pesan diterima dari iframe:', decodedMessage);
         
-        if(decodedMessage.action == 'misiDone'){
-          localStorage.setItem('mission1', decodedMessage.data)
-          // alert(decodedMessage.data)
-          setTimeout(() => {
-            router.push('/mission');
-            // router.push('/mission/mission2/quiz');
-          }, 200);
+        if(decodedMessage.action == 'camdone'){
+          // setTimeout(() => {
+          //   // router.push('/mission');
+          //   router.push('/mission/mission1/ar');
+          // }, 200);
+          location.href='/mission/mission1/ar'
         }
 
       } catch (error) {
