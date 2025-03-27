@@ -37,6 +37,13 @@ export default function ARGame() {
           localStorage.setItem('mission1', decodedMessage.data)
           // alert(decodedMessage.data)
           setTimeout(() => {
+            // router.push('/mission');
+            router.push('/mission/mission2/quiz');
+          }, 200);
+        }else if(decodedMessage.action == 'misiDone2'){
+          localStorage.setItem('mission1', decodedMessage.data)
+          // alert(decodedMessage.data)
+          setTimeout(() => {
             router.push('/mission');
             // router.push('/mission/mission2/quiz');
           }, 200);

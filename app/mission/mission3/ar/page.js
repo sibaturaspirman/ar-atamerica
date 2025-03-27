@@ -37,14 +37,15 @@ export default function ARGame() {
           localStorage.setItem('mission3', decodedMessage.data)
           // alert(decodedMessage.data)
           setTimeout(() => {
-            router.push('/mission');
-            // router.push('/mission/mission4/quiz');
+            // router.push('/mission');
+            router.push('/mission/mission4/quiz');
           }, 200);
-        }else if(decodedMessage.action == 'misiDoneQuiz'){
+        }else if(decodedMessage.action == 'misiDone2'){
           localStorage.setItem('mission3', decodedMessage.data)
           // alert(decodedMessage.data)
           setTimeout(() => {
-            router.push('/mission/mission4/quiz');
+            router.push('/mission');
+            // router.push('/mission/mission4/quiz');
           }, 200);
         }
 
