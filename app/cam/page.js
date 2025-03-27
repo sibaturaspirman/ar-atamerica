@@ -142,6 +142,7 @@ export default function Cam() {
 
     const [imageFile, setImageFile] = useState(null);
     const [genderFix, setGenderFix] = useState(null);
+    const [nameFix, setNameFix] = useState(null);
     const [numProses, setNumProses] = useState(0);
     const [numProses1, setNumProses1] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -155,12 +156,14 @@ export default function Cam() {
         // Perform localStorage action
         if (typeof localStorage !== 'undefined') {
             const item1 = localStorage.getItem('genderFix')
+            const item2 = localStorage.getItem('nameFix')
             setGenderFix(item1)
+            setNameFix(item2)
         }
 
         const aiInstance = new PadmaAIClient("https://padmaai.zirolu.id", "app_tXxTmRGXzUwliMw1sMgdFUlDFF2S2IO6", "733e5a41-1540-46ee-a1f2-6565d128ba61");
         setPadmaAI(aiInstance);
-    }, [genderFix])
+    }, [genderFix, nameFix])
 
 
 
@@ -217,9 +220,33 @@ export default function Cam() {
                     localStorage.setItem("resulAIBase64", dataUrl)
                     localStorage.setItem("faceURLResult", FACE_URL_RESULT)
                 }
-                setTimeout(() => {
-                    router.push('/mission');
-                }, 200);
+
+                const options = {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        name:nameFix,
+                        gender:genderFix,
+                        image:FACE_URL_RESULT
+                    }),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                };
+                
+                await fetch('https://atam-api.zirolu.id/api/v1/ar/submit', options)
+                    .then(response => response.json())
+                    .then(response => {
+                        // console.log(response)
+                        router.push('/mission');
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    });
+
+                // setTimeout(() => {
+                //     router.push('/mission');
+                // }, 200);
             })
             // console.log(FACE_URL_RESULT)
 
